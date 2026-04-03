@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ru" data-locale="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">32 Scenarios of Human–AI Collaboration</title>
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <meta name="description" content="An open framework for describing 32 modes of human–AI collaboration in the creative industries.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="32 Scenarios of Human–AI Collaboration">
+  <meta property="og:title" content="32 Scenarios of Human–AI Collaboration">
+  <meta property="og:description" content="An open framework for describing 32 modes of human–AI collaboration in the creative industries.">
+  <meta property="og:url" content="https://ai.m1d45.com">
+  <meta property="og:image" content="https://ai.m1d45.com/og/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Visual overview of the 32 scenarios of human–AI collaboration">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="32 Scenarios of Human–AI Collaboration">
+  <meta name="twitter:description" content="An open framework for describing 32 modes of human–AI collaboration in the creative industries.">
+  <meta name="twitter:image" content="https://ai.m1d45.com/og/og-cover.jpg">
+
+  <link rel="canonical" href="https://YOUR-DOMAIN">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@300;400&family=Martel:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E87JGFC9B3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E87JGFC9B3');
+</script>
+  <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym(100350501, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/100350501" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-text">
+        <div class="header-eyebrow" data-i18n="ui.eyebrow">AI LAB · Школа дизайна НИУ ВШЭ · Вадим Булгаков</div>
+        <h1 class="header-title">
+          <span data-i18n="ui.title.line1">32 сценария коллаборативной работы</span><br>
+          <em data-i18n="ui.title.line2">человека и ИИ</em>
+          <span data-i18n="ui.title.line3"> в креативных индустриях</span>
+        </h1>
+      </div>
+      <div class="header-controls">
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-current" id="langCurrentBtn" aria-haspopup="true" aria-expanded="false">
+            <span id="langCurrentLabel">RU</span>
+            <span class="lang-arrow">▾</span>
+          </button>
+          <div class="lang-dropdown" id="langDropdown" role="menu">
+            <button class="lang-option active" data-lang="ru" role="menuitem">RU — Русский</button>
+            <button class="lang-option" data-lang="en" role="menuitem">EN — English</button>
+            <button class="lang-option" data-lang="de" role="menuitem">DE — Deutsch</button>
+            <button class="lang-option" data-lang="fr" role="menuitem">FR — Français</button>
+            <button class="lang-option" data-lang="hu" role="menuitem">HU — Magyar</button>
+            <button class="lang-option" data-lang="es" role="menuitem">ES — Español</button>
+            <button class="lang-option" data-lang="zh" role="menuitem">ZH — 中文</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-bar-inner">
+
+      <!-- Open filter modal -->
+      <button class="filter-open-btn" id="filterOpenBtn" aria-haspopup="dialog">
+        <span class="filter-open-icon">⊟</span>
+        <span data-i18n="ui.questionnaire.intro_label">Найдите свой сценарий</span>
+        <span class="filter-answered-badge" id="filterAnsweredBadge" style="display:none"></span>
+      </button>
+
+      <!-- Active filter chips -->
+      <div class="filter-chips" id="filterChips"></div>
+
+      <div class="filter-bar-right">
+        <!-- Match counter -->
+        <div class="match-counter">
+          <strong id="visibleCount">32</strong>
+          <span data-i18n="ui.questionnaire.of_total">из 32</span>
+        </div>
+
+        <!-- Reset -->
+        <button class="reset-btn" id="resetBtn" style="display:none">
+          <span>↺</span>
+          <span data-i18n="ui.questionnaire.reset">Сбросить</span>
+        </button>
+
+        <!-- Search -->
+        <input class="search-input" id="searchInput" type="text" data-i18n-placeholder="ui.search.placeholder">
+
+        <!-- View toggle -->
+        <div class="view-toggle">
+          <button class="view-btn active" id="gridBtn" title="Grid">⊞</button>
+          <button class="view-btn" id="listBtn" title="List">☰</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend strip -->
+    <div class="legend-strip">
+      <div class="legend-item"><span class="legend-dot aug"></span><span data-i18n="ui.modes.aug">Аугментация</span></div>
+      <div class="legend-item"><span class="legend-dot coop"></span><span data-i18n="ui.modes.coop">Кооперация</span></div>
+      <div class="legend-item"><span class="legend-dot auto"></span><span data-i18n="ui.modes.auto">Автоматизация</span></div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">◯</div>
+      <p data-i18n="ui.empty_state"></p>
+    </div>
+    <div class="cards-grid" id="cardsGrid"></div>
+  </main>
+
+  <!-- FILTER MODAL -->
+  <div class="fmodal-overlay" id="fmodalOverlay" role="dialog" aria-modal="true" aria-label="Фильтр">
+    <div class="fmodal" id="fmodal">
+
+      <div class="fmodal-header">
+        <div>
+          <div class="fmodal-label" data-i18n="ui.questionnaire.intro_label">Найдите свой сценарий</div>
+          <p class="fmodal-desc" data-i18n="ui.questionnaire.intro_text">Ответьте на 5 вопросов о вашей задаче — система подберёт подходящие сценарии.</p>
+        </div>
+        <button class="fmodal-close" id="fmodalCloseBtn" aria-label="Закрыть">×</button>
+      </div>
+
+      <div class="questions-list" id="questionsList">
+
+        <div class="question-block" data-question="stage">
+          <div class="question-header">
+            <span class="question-num">01</span>
+            <span class="question-text" data-i18n="ui.questionnaire.q1.label"></span>
+          </div>
+          <div class="question-options">
+            <button class="q-option" data-question="stage" data-value="research">
+              <span class="q-option-icon">◌</span>
+              <span class="q-option-text" data-i18n="ui.questionnaire.q1.research"></span>
+            </button>
+            <button class="q-option" data-question="stage" data-value="impl">
+              <span class="q-option-icon">◉</span>
+              <span class="q-option-text" data-i18n="ui.questionnaire.q1.impl"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="question-block" data-question="expertise">
+          <div class="question-header">
+            <span class="question-num">02</span>
+            <span class="question-text" data-i18n="ui.questionnaire.q2.label"></span>
+          </div>
+          <div class="question-options">
+            <button class="q-option" data-question="expertise" data-value="low">
+              <span class="q-option-icon">−</span>
+              <span class="q-option-text" data-i18n="ui.questionnaire.q2.low"></span>
+            </button>
+            <button class="q-option" data-question="expertise" data-value="high">
+              <span class="q-option-icon">+</span>
+              <span class="q-option-text" data-i18n="ui.questionnaire.q2.high"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="question-block" data-question="speed">
+          <div class="question-header">
+            <span class="question-num">03</span>
+            <span class="question-text" data-i18n="ui.questionnaire.q3.label"></span>
+          </div>
+          <div class="question-options">
+            <button class="q-option" data-question="speed" data-value="low">
+              <span class="q-option-icon">◷</span>
+              <span class="q-option-text" data-i18n="ui.questionnaire.q3.low"></span>
+            </button>
+            <button class="q-option" data-question="speed" data-value="high">
+              <span class="q-option-icon">⚡</span>
+              <span class="q-option-text" data-i18n="ui.questionnaire.q3.high"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="question-block" data-question="motivation">
+          <div class="question-header">
+            <span class="question-num">04</span>
+            <span class="question-text" data-i18n="ui.questionnaire.q4.label"></span>
+          </div>
+          <div class="question-options">
+            <button class="q-option" data-question="motivation" data-value="low">
+              <span class="q-option-icon">□</span>
+              <span class="q-option-text" data-i18n="ui.questionnaire.q4.low"></span>
+            </button>
+            <button class="q-option" data-question="motivation" data-value="high">
+              <span class="q-option-icon">■</span>
+              <span class="q-option-text" data-i18n="ui.questionnaire.q4.high"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="question-block" data-question="cost">
+          <div class="question-header">
+            <span class="question-num">05</span>
+            <span class="question-text" data-i18n="ui.questionnaire.q5.label"></span>
+          </div>
+          <div class="question-options">
+            <button class="q-option" data-question="cost" data-value="low">
+              <span class="q-option-icon">○</span>
+              <span class="q-option-text" data-i18n="ui.questionnaire.q5.low"></span>
+            </button>
+            <button class="q-option" data-question="cost" data-value="high">
+              <span class="q-option-icon">●</span>
+              <span class="q-option-text" data-i18n="ui.questionnaire.q5.high"></span>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /questions-list -->
+
+      <div class="fmodal-footer">
+        <div class="match-counter">
+          <span data-i18n="ui.questionnaire.showing"></span>
+          <strong id="visibleCountModal">32</strong>
+          <span data-i18n="ui.questionnaire.of_total">из 32</span>
+        </div>
+        <button class="fmodal-apply-btn" id="fmodalApplyBtn" data-i18n="ui.questionnaire.apply">Применить</button>
+      </div>
+
+    </div><!-- /fmodal -->
+  </div><!-- /fmodal-overlay -->
+
+  <!-- MODAL OVERLAY -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal" id="modal">
+      <div class="modal-header" id="modalHeader"></div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <!-- Locale files — all loaded upfront for instant switching -->
+  <script src="locales/ru.js"></script>
+  <script src="locales/en.js"></script>
+  <script src="locales/de.js"></script>
+  <script src="locales/fr.js"></script>
+  <script src="locales/hu.js"></script>
+  <script src="locales/es.js"></script>
+  <script src="locales/zh.js"></script>
+  <!-- App -->
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
