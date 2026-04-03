@@ -332,6 +332,7 @@ index.html          — main interface / основной интерфейс
 /css                 — styles / стили
 /locales             — localisation files / файлы локализации
 /docs                — extended methodology and materials / расширенная методология и материалы
+```
 
 ---
 
