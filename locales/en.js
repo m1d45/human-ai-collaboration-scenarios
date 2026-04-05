@@ -65,6 +65,14 @@ window.LOCALES.en = {
       risk_wrong_label:   'Wrong mode',
       examples:           'Task examples',
       related:            'Related scenarios'
+    },
+    graph: {
+      page_title:   'Scenario Map',
+      back:         '← All scenarios',
+      hint:         'Drag · Scroll to zoom · Click a node to explore',
+      mode_filter:  'Mode:',
+      stage_filter: 'Stage:',
+      map_link:     'Scenario Map →'
     }
   },
 

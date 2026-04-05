@@ -188,6 +188,27 @@ html[lang="zh"] .question-text {
   flex-wrap: wrap;
 }
 
+/* Scenario map link */
+.graph-map-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  height: 32px;
+  padding: 0 0.65rem;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color var(--transition), border-color var(--transition);
+}
+.graph-map-link:hover {
+  color: var(--text);
+  border-color: var(--border-light);
+}
+
 /* Open filter button */
 .filter-open-btn {
   display: flex;
@@ -198,7 +219,8 @@ html[lang="zh"] .question-text {
   color: var(--text-dim);
   font-family: var(--font-mono);
   font-size: 0.9rem;
-  padding: 0.35rem 0.8rem;
+  height: 32px;
+  padding: 0 0.8rem;
   cursor: pointer;
   border-radius: 2px;
   transition: all var(--transition);
@@ -294,7 +316,8 @@ html[lang="zh"] .question-text {
   font-family: var(--font-mono);
   font-size: 0.56rem;
   letter-spacing: 0.1em;
-  padding: 0.32rem 0.6rem;
+  height: 32px;
+  padding: 0 0.6rem;
   cursor: pointer;
   border-radius: 2px;
   transition: all var(--transition);
@@ -345,7 +368,8 @@ html[lang="zh"] .question-text {
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 300;
-  padding: 0.35rem 0.75rem;
+  height: 32px;
+  padding: 0 0.75rem;
   border-radius: 2px;
   outline: none;
   transition: border-color var(--transition);
@@ -361,7 +385,8 @@ html[lang="zh"] .question-text {
   background: var(--bg3);
   border: 1px solid var(--border);
   color: var(--text-muted);
-  padding: 0.35rem 0.58rem;
+  height: 32px;
+  padding: 0 0.58rem;
   cursor: pointer;
   border-radius: 2px;
   font-size: 0.75rem;

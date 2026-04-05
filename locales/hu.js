@@ -65,6 +65,14 @@ window.LOCALES.hu = {
       risk_wrong_label: 'Helytelen mód',
       examples: 'Feladatpéldák',
       related: 'Kapcsolódó forgatókönyvek'
+    },
+    graph: {
+      page_title:   'Forgatókönyv-térkép',
+      back:         '← Összes forgatókönyv',
+      hint:         'Húzás · Görgetés a nagyításhoz · Kattintás a felfedezéshez',
+      mode_filter:  'Mód:',
+      stage_filter: 'Szakasz:',
+      map_link:     'Forgatókönyv-térkép →'
     }
   },
 

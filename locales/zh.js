@@ -65,6 +65,14 @@ window.LOCALES.zh = {
       risk_wrong_label: '错误模式',
       examples: '任务示例',
       related: '相关场景'
+    },
+    graph: {
+      page_title:   '场景地图',
+      back:         '← 所有场景',
+      hint:         '拖拽 · 滚动缩放 · 点击探索',
+      mode_filter:  '模式：',
+      stage_filter: '阶段：',
+      map_link:     '场景地图 →'
     }
   },
 

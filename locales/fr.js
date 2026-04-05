@@ -65,6 +65,14 @@ window.LOCALES.fr = {
       risk_wrong_label:   'Mode incorrect',
       examples:           'Exemples de tâches',
       related:            'Scénarios connexes'
+    },
+    graph: {
+      page_title:   'Carte des scénarios',
+      back:         '← Tous les scénarios',
+      hint:         'Glisser · Défiler pour zoomer · Cliquer pour explorer',
+      mode_filter:  'Mode :',
+      stage_filter: 'Étape :',
+      map_link:     'Carte des scénarios →'
     }
   },
 

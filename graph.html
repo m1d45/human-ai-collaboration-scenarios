@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ru" data-locale="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Карта сценариев</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Locale data -->
+  <script src="locales/ru.js"></script>
+  <script src="locales/en.js"></script>
+  <script src="locales/de.js"></script>
+  <script src="locales/fr.js"></script>
+  <script src="locales/hu.js"></script>
+  <script src="locales/es.js"></script>
+  <script src="locales/zh.js"></script>
+  <!-- i18n engine -->
+  <script src="js/i18n.js"></script>
+  <!-- Structural scenario data -->
+  <script src="js/data.js"></script>
+
+  <style>
+    :root {
+      --bg:           #0a0a0a;
+      --bg2:          #111111;
+      --bg3:          #181818;
+      --border:       #242424;
+      --border-light: #333333;
+      --text:         #e8e4dc;
+      --text-dim:     #7a7570;
+      --text-muted:   #4a4540;
+      --aug:          #c8a96e;
+      --aug-bg:       rgba(200,169,110,0.10);
+      --aug-border:   rgba(200,169,110,0.28);
+      --coop:         #7eb8a4;
+      --coop-bg:      rgba(126,184,164,0.10);
+      --coop-border:  rgba(126,184,164,0.28);
+      --auto:         #8899aa;
+      --auto-bg:      rgba(136,153,170,0.10);
+      --auto-border:  rgba(136,153,170,0.28);
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-mono:  'IBM Plex Mono', monospace;
+      --transition: 0.18s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-serif);
+      font-weight: 300;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+      flex-shrink: 0;
+      z-index: 60;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 2rem;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .back-link {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      transition: color var(--transition), border-color var(--transition);
+      white-space: nowrap;
+    }
+    .back-link:hover { color: var(--text); border-color: var(--border-light); }
+    .page-title {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── Legend / filter chips ── */
+    .legend {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .legend-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+    .chip {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity var(--transition), background var(--transition), border-color var(--transition);
+      opacity: 0.45;
+    }
+    .chip.active { opacity: 1; }
+    .chip-aug  { color: var(--aug);  border-color: var(--aug-border);  background: var(--aug-bg); }
+    .chip-coop { color: var(--coop); border-color: var(--coop-border); background: var(--coop-bg); }
+    .chip-auto { color: var(--auto); border-color: var(--auto-border); background: var(--auto-bg); }
+    .chip-research { color: #b8a4c8; border-color: rgba(184,164,200,0.28); background: rgba(184,164,200,0.07); }
+    .chip-impl     { color: #a4b8c8; border-color: rgba(164,184,200,0.28); background: rgba(164,184,200,0.07); }
+
+    .divider { width: 1px; height: 1.2rem; background: var(--border); flex-shrink: 0; }
+
+    .btn-reset {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      background: transparent;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .btn-reset:hover { color: var(--text-dim); border-color: var(--border-light); }
+
+    /* ── Lang switcher ── */
+    .lang-switcher { position: relative; }
+    .lang-current {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      padding: 0.28rem 0.6rem;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: color var(--transition), border-color var(--transition), background var(--transition);
+      white-space: nowrap;
+    }
+    .lang-current:hover, .lang-current.open {
+      border-color: var(--border-light);
+      color: var(--text);
+      background: var(--bg3);
+    }
+    .lang-arrow { font-size: 0.5rem; transition: transform var(--transition); }
+    .lang-current.open .lang-arrow { transform: rotate(180deg); }
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: none;
+      flex-direction: column;
+      min-width: 140px;
+      z-index: 100;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+    .lang-dropdown.open { display: flex; }
+    .lang-option {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 0.8rem;
+      text-align: left;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+    }
+    .lang-option:last-child { border-bottom: none; }
+    .lang-option:hover { background: var(--bg3); color: var(--text); }
+    .lang-option.active { color: var(--aug); }
+
+    /* ── Canvas area ── */
+    .canvas-wrap {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    #graph-svg {
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+    }
+    #graph-svg:active { cursor: grabbing; }
+
+    /* ── Node styles (SVG) ── */
+    .node circle {
+      stroke-width: 1.5;
+      cursor: pointer;
+    }
+    .node text {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 400;
+      fill: #e8e4dc;
+      pointer-events: none;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+    .link {
+      stroke-opacity: 0.18;
+      stroke-width: 1;
+    }
+
+    /* ── Detail panel ── */
+    .detail-panel {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 300px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 1.25rem;
+      display: none;
+      z-index: 40;
+      max-height: calc(100vh - 130px);
+      overflow-y: auto;
+    }
+    .detail-panel.visible { display: block; }
+
+    .detail-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0.2rem 0.4rem;
+      border-radius: 2px;
+      transition: color var(--transition);
+    }
+    .detail-close:hover { color: var(--text); }
+
+    .detail-badges {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.07em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      border: 1px solid transparent;
+    }
+    .badge-aug   { color: var(--aug);  border-color: var(--aug-border);  background: var(--aug-bg); }
+    .badge-coop  { color: var(--coop); border-color: var(--coop-border); background: var(--coop-bg); }
+    .badge-auto  { color: var(--auto); border-color: var(--auto-border); background: var(--auto-bg); }
+    .badge-stage { color: var(--text-dim); border-color: var(--border); background: transparent; }
+
+    .detail-num {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.3rem;
+    }
+    .detail-title {
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.85rem;
+    }
+    .detail-section-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .detail-text {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--text-dim);
+      margin-bottom: 0.85rem;
+    }
+
+    .related-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.35rem;
+    }
+    .related-btn {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--text-dim);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .related-btn:hover { color: var(--text); border-color: var(--border-light); }
+
+    /* ── Hint ── */
+    .hint {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      pointer-events: none;
+    }
+
+    /* ── Scrollbar ── */
+    .detail-panel::-webkit-scrollbar { width: 4px; }
+    .detail-panel::-webkit-scrollbar-track { background: transparent; }
+    .detail-panel::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <a class="back-link" href="index.html" data-i18n="ui.graph.back">← Все сценарии</a>
+      <span class="page-title" data-i18n="ui.graph.page_title">Карта сценариев</span>
+    </div>
+    <div class="header-right">
+      <div class="legend">
+        <span class="legend-label" data-i18n="ui.graph.mode_filter">Режим:</span>
+        <button class="chip chip-aug  active" data-filter="mode" data-value="aug"      data-i18n="ui.modes.aug">Аугментация</button>
+        <button class="chip chip-coop active" data-filter="mode" data-value="coop"     data-i18n="ui.modes.coop">Кооперация</button>
+        <button class="chip chip-auto active" data-filter="mode" data-value="auto"     data-i18n="ui.modes.auto">Автоматизация</button>
+        <div class="divider"></div>
+        <span class="legend-label" data-i18n="ui.graph.stage_filter">Стадия:</span>
+        <button class="chip chip-research active" data-filter="stage" data-value="research" data-i18n="ui.stages.research">Исследование</button>
+        <button class="chip chip-impl     active" data-filter="stage" data-value="impl"     data-i18n="ui.stages.impl">Реализация</button>
+        <div class="divider"></div>
+        <button class="btn-reset" id="btn-reset" data-i18n="ui.questionnaire.reset">Сбросить</button>
+      </div>
+
+      <!-- Lang switcher -->
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-current" id="langCurrentBtn" aria-haspopup="true" aria-expanded="false">
+          <span id="langCurrentLabel">RU</span>
+          <span class="lang-arrow">▾</span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown" role="menu">
+          <button class="lang-option active" data-lang="ru" role="menuitem">RU — Русский</button>
+          <button class="lang-option" data-lang="en" role="menuitem">EN — English</button>
+          <button class="lang-option" data-lang="de" role="menuitem">DE — Deutsch</button>
+          <button class="lang-option" data-lang="fr" role="menuitem">FR — Français</button>
+          <button class="lang-option" data-lang="hu" role="menuitem">HU — Magyar</button>
+          <button class="lang-option" data-lang="es" role="menuitem">ES — Español</button>
+          <button class="lang-option" data-lang="zh" role="menuitem">ZH — 中文</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="canvas-wrap">
+  <svg id="graph-svg"></svg>
+
+  <div class="detail-panel" id="detail-panel">
+    <button class="detail-close" id="detail-close">×</button>
+    <div class="detail-badges" id="detail-badges"></div>
+    <div class="detail-num"    id="detail-num"></div>
+    <div class="detail-title"  id="detail-title"></div>
+    <div class="detail-section-label" data-i18n="ui.card.human_role">Роль человека</div>
+    <div class="detail-text"   id="detail-human"></div>
+    <div class="detail-section-label" data-i18n="ui.card.ai_role">Роль ИИ</div>
+    <div class="detail-text"   id="detail-ai"></div>
+    <div class="detail-section-label" data-i18n="ui.modal.related">Смежные сценарии</div>
+    <div class="related-list"  id="detail-related"></div>
+  </div>
+
+  <div class="hint" data-i18n="ui.graph.hint">Перетащите · Прокрутите для масштаба · Кликните на узел</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ── Init i18n ── */
+  i18n.init();
+  i18n.applyToDOM();
+
+  /* ── Helpers ── */
+  function parseRelated(id) {
+    const arr = i18n.t_scenario(id, 'related');
+    if (!Array.isArray(arr)) return [];
+    return arr.map(s => parseInt(String(s).replace(/[СC]-0*/,''))).filter(n => !isNaN(n));
+  }
+
+  /* ── Build edges from current locale (undirected, deduplicated) ── */
+  function buildEdges() {
+    const edgeSet = new Set();
+    const result  = [];
+    window.SCENARIOS_DATA.forEach(s => {
+      parseRelated(s.id).forEach(r => {
+        const key = [Math.min(s.id, r), Math.max(s.id, r)].join('-');
+        if (!edgeSet.has(key)) {
+          edgeSet.add(key);
+          result.push({ source: s.id - 1, target: r - 1 });
+        }
+      });
+    });
+    return result;
+  }
+
+  /* ── State ── */
+  const activeFilters = { mode: new Set(['aug','coop','auto']), stage: new Set(['research','impl']) };
+  let selectedId = null;
+
+  /* ── Mode colors ── */
+  const modeColor = { aug: '#c8a96e', coop: '#7eb8a4', auto: '#8899aa' };
+
+  /* ── D3 setup ── */
+  const wrap = document.querySelector('.canvas-wrap');
+  let W = wrap.clientWidth, H = wrap.clientHeight;
+
+  const svg = d3.select('#graph-svg');
+  const g   = svg.append('g');
+
+  const zoom = d3.zoom()
+    .scaleExtent([0.3, 3])
+    .on('zoom', e => g.attr('transform', e.transform));
+  svg.call(zoom);
+
+  const linkGroup = g.append('g').attr('class', 'links');
+  const nodeGroup = g.append('g').attr('class', 'nodes');
+
+  const nodes = window.SCENARIOS_DATA.map(s => ({ ...s }));
+  const edges = buildEdges();
+
+  const simulation = d3.forceSimulation(nodes)
+    .force('link',      d3.forceLink(edges).id((d, i) => i).distance(80).strength(0.35))
+    .force('charge',    d3.forceManyBody().strength(-280))
+    .force('center',    d3.forceCenter(W / 2, H / 2))
+    .force('collision', d3.forceCollide(22));
+
+  const link = linkGroup.selectAll('line')
+    .data(edges)
+    .join('line')
+    .attr('class', 'link')
+    .attr('stroke', '#e8e4dc');
+
+  const node = nodeGroup.selectAll('g.node')
+    .data(nodes)
+    .join('g')
+    .attr('class', 'node')
+    .call(d3.drag()
+      .on('start', dragStart)
+      .on('drag',  dragged)
+      .on('end',   dragEnd))
+    .on('click', (event, d) => { event.stopPropagation(); selectNode(d.id); });
+
+  node.append('circle')
+    .attr('r', 14)
+    .attr('fill',   d => modeColor[d.mode] + '22')
+    .attr('stroke', d => modeColor[d.mode]);
+
+  node.append('text').text(d => d.id);
+
+  svg.on('click', () => {
+    selectedId = null;
+    updateVisuals();
+    document.getElementById('detail-panel').classList.remove('visible');
+  });
+
+  simulation.on('tick', () => {
+    link
+      .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+
+  /* ── Resize ── */
+  window.addEventListener('resize', () => {
+    W = wrap.clientWidth; H = wrap.clientHeight;
+    simulation.force('center', d3.forceCenter(W / 2, H / 2)).alpha(0.1).restart();
+  });
+
+  /* ── Drag ── */
+  function dragStart(event, d) {
+    if (!event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x; d.fy = d.y;
+  }
+  function dragged(event, d) { d.fx = event.x; d.fy = event.y; }
+  function dragEnd(event, d) {
+    if (!event.active) simulation.alphaTarget(0);
+    d.fx = null; d.fy = null;
+  }
+
+  /* ── Select node ── */
+  function selectNode(id) {
+    selectedId = id;
+    updateVisuals();
+    showDetail(id);
+  }
+
+  /* ── Update visual state ── */
+  function updateVisuals() {
+    const visibleIds = new Set(
+      window.SCENARIOS_DATA
+        .filter(s => activeFilters.mode.has(s.mode) && activeFilters.stage.has(s.stage))
+        .map(s => s.id)
+    );
+
+    const connectedIds = new Set();
+    if (selectedId !== null) {
+      parseRelated(selectedId).forEach(r => connectedIds.add(r));
+      connectedIds.add(selectedId);
+    }
+
+    node.each(function (d) {
+      const el = d3.select(this);
+      const visible     = visibleIds.has(d.id);
+      const highlighted = selectedId === null ? true : connectedIds.has(d.id);
+
+      el.select('circle')
+        .attr('r', d.id === selectedId ? 18 : 14)
+        .style('opacity', visible ? (highlighted ? 1 : 0.18) : 0.06)
+        .attr('stroke-width', d.id === selectedId ? 2.5 : 1.5);
+
+      el.select('text')
+        .style('opacity', visible ? (highlighted ? 1 : 0.15) : 0.04);
+    });
+
+    link.style('opacity', d => {
+      const sv = visibleIds.has(d.source.id) && visibleIds.has(d.target.id);
+      if (!sv) return 0.02;
+      if (selectedId === null) return 0.18;
+      const connected = connectedIds.has(d.source.id) && connectedIds.has(d.target.id);
+      return connected ? 0.55 : 0.04;
+    });
+  }
+
+  /* ── Detail panel ── */
+  function showDetail(id) {
+    const s = window.SCENARIOS_DATA.find(s => s.id === id);
+    if (!s) return;
+
+    document.getElementById('detail-badges').innerHTML =
+      `<span class="badge badge-${s.mode}">${i18n.t('ui.modes.' + s.mode)}</span>` +
+      `<span class="badge badge-stage">${i18n.t('ui.stages.' + s.stage)}</span>`;
+
+    document.getElementById('detail-num').textContent =
+      `С-${String(id).padStart(2, '0')} · ${s.code_b}`;
+    document.getElementById('detail-title').textContent = i18n.t_scenario(id, 'title');
+    document.getElementById('detail-human').textContent = i18n.t_scenario(id, 'human_role');
+    document.getElementById('detail-ai').textContent    = i18n.t_scenario(id, 'ai_role');
+
+    const relIds  = parseRelated(id);
+    const relList = document.getElementById('detail-related');
+    relList.innerHTML = relIds.map(r => {
+      const label = i18n.t_scenario(r, 'title');
+      return `<button class="related-btn" data-id="${r}">С-${String(r).padStart(2,'0')} ${label}</button>`;
+    }).join('');
+
+    relList.querySelectorAll('.related-btn').forEach(btn => {
+      btn.addEventListener('click', () => selectNode(+btn.dataset.id));
+    });
+
+    document.getElementById('detail-panel').classList.add('visible');
+  }
+
+  /* ── Filters ── */
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const filter = chip.dataset.filter;
+      const value  = chip.dataset.value;
+      const set    = activeFilters[filter];
+      if (set.has(value)) {
+        if (set.size > 1) { set.delete(value); chip.classList.remove('active'); }
+      } else {
+        set.add(value); chip.classList.add('active');
+      }
+      updateVisuals();
+    });
+  });
+
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    activeFilters.mode  = new Set(['aug','coop','auto']);
+    activeFilters.stage = new Set(['research','impl']);
+    document.querySelectorAll('.chip').forEach(c => c.classList.add('active'));
+    selectedId = null;
+    document.getElementById('detail-panel').classList.remove('visible');
+    updateVisuals();
+  });
+
+  document.getElementById('detail-close').addEventListener('click', () => {
+    selectedId = null;
+    updateVisuals();
+    document.getElementById('detail-panel').classList.remove('visible');
+  });
+
+  /* ── Lang switcher ── */
+  const currentBtn = document.getElementById('langCurrentBtn');
+  const dropdown   = document.getElementById('langDropdown');
+  const label      = document.getElementById('langCurrentLabel');
+
+  function updateLangUI(lang) {
+    label.textContent = lang.toUpperCase();
+    document.querySelectorAll('.lang-option').forEach(o =>
+      o.classList.toggle('active', o.dataset.lang === lang));
+    currentBtn.classList.remove('open');
+    dropdown.classList.remove('open');
+    currentBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  currentBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = dropdown.classList.contains('open');
+    dropdown.classList.toggle('open', !open);
+    currentBtn.classList.toggle('open', !open);
+    currentBtn.setAttribute('aria-expanded', String(!open));
+  });
+
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const lang = opt.dataset.lang;
+      i18n.setLocale(lang);
+      updateLangUI(lang);
+      // Re-render open detail panel
+      if (selectedId !== null) showDetail(selectedId);
+    });
+  });
+
+  document.addEventListener('click', () => {
+    dropdown.classList.remove('open');
+    currentBtn.classList.remove('open');
+    currentBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  updateLangUI(i18n.getLocale());
+
+  /* ── Initial render ── */
+  updateVisuals();
+})();
+</script>
+</body>
+</html>

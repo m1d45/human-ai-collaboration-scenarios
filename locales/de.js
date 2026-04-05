@@ -65,6 +65,14 @@ window.LOCALES.de = {
       risk_wrong_label:   'Falscher Modus',
       examples:           'Beispiele für Aufgaben',
       related:            'Verwandte Szenarien'
+    },
+    graph: {
+      page_title:   'Szenarienkarte',
+      back:         '← Alle Szenarien',
+      hint:         'Ziehen · Scrollen zum Zoomen · Klicken zum Erkunden',
+      mode_filter:  'Modus:',
+      stage_filter: 'Phase:',
+      map_link:     'Szenarienkarte →'
     }
   },
 

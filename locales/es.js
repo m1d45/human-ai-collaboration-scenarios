@@ -65,6 +65,14 @@ window.LOCALES.es = {
       risk_wrong_label: 'Modo incorrecto',
       examples: 'Ejemplos de tareas',
       related: 'Escenarios relacionados'
+    },
+    graph: {
+      page_title:   'Mapa de escenarios',
+      back:         '← Todos los escenarios',
+      hint:         'Arrastrar · Desplazar para zoom · Clic para explorar',
+      mode_filter:  'Modo:',
+      stage_filter: 'Etapa:',
+      map_link:     'Mapa de escenarios →'
     }
   },
 
